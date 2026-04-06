@@ -124,15 +124,22 @@ function App() {
 
     // Track session duration + abandoned games on page unload
     const handleBeforeUnload = () => {
-      const sessionDurationSec = Math.round((Date.now() - sessionStartTime.current) / 1000);
+      const sessionDurationSec = Math.round(
+        (Date.now() - sessionStartTime.current) / 1000,
+      );
       posthog.capture("session_ended", {
         session_duration_seconds: sessionDurationSec,
         pictures_played_today: getPicturesPlayedToday(),
       });
 
       // If user is mid-game, track abandonment
-      if (gameStartTime.current && (screen === "game" || screen === "loading")) {
-        const gameDurationSec = Math.round((Date.now() - gameStartTime.current) / 1000);
+      if (
+        gameStartTime.current &&
+        (screen === "game" || screen === "loading")
+      ) {
+        const gameDurationSec = Math.round(
+          (Date.now() - gameStartTime.current) / 1000,
+        );
         posthog.capture("game_abandoned", {
           stage: screen,
           game_duration_seconds: gameDurationSec,
@@ -214,33 +221,39 @@ function App() {
     });
   }, []);
 
-  const handleWin = useCallback((finalGuesses) => {
-    const gameDurationSec = gameStartTime.current
-      ? Math.round((Date.now() - gameStartTime.current) / 1000)
-      : null;
-    posthog.capture("game_won", {
-      attempts: finalGuesses.length,
-      word_length: answer.length,
-      game_duration_seconds: gameDurationSec,
-    });
-    gameStartTime.current = null;
-    setGuesses(finalGuesses);
-    setScreen("win");
-  }, [answer]);
+  const handleWin = useCallback(
+    (finalGuesses) => {
+      const gameDurationSec = gameStartTime.current
+        ? Math.round((Date.now() - gameStartTime.current) / 1000)
+        : null;
+      posthog.capture("game_won", {
+        attempts: finalGuesses.length,
+        word_length: answer.length,
+        game_duration_seconds: gameDurationSec,
+      });
+      gameStartTime.current = null;
+      setGuesses(finalGuesses);
+      setScreen("win");
+    },
+    [answer],
+  );
 
-  const handleLose = useCallback((finalGuesses) => {
-    const gameDurationSec = gameStartTime.current
-      ? Math.round((Date.now() - gameStartTime.current) / 1000)
-      : null;
-    posthog.capture("game_lost", {
-      attempts: finalGuesses.length,
-      word_length: answer.length,
-      game_duration_seconds: gameDurationSec,
-    });
-    gameStartTime.current = null;
-    setGuesses(finalGuesses);
-    setScreen("loss");
-  }, [answer]);
+  const handleLose = useCallback(
+    (finalGuesses) => {
+      const gameDurationSec = gameStartTime.current
+        ? Math.round((Date.now() - gameStartTime.current) / 1000)
+        : null;
+      posthog.capture("game_lost", {
+        attempts: finalGuesses.length,
+        word_length: answer.length,
+        game_duration_seconds: gameDurationSec,
+      });
+      gameStartTime.current = null;
+      setGuesses(finalGuesses);
+      setScreen("loss");
+    },
+    [answer],
+  );
 
   const remainingWords = wordList.filter((w) => !usedWords.includes(w));
   const hasMoreWords = remainingWords.length > 0;
@@ -265,7 +278,9 @@ function App() {
   const handleNewPicture = () => {
     // Track abandoned game if user leaves mid-game for a new picture
     if (gameStartTime.current) {
-      const gameDurationSec = Math.round((Date.now() - gameStartTime.current) / 1000);
+      const gameDurationSec = Math.round(
+        (Date.now() - gameStartTime.current) / 1000,
+      );
       posthog.capture("game_abandoned", {
         stage: screen,
         game_duration_seconds: gameDurationSec,
@@ -325,7 +340,9 @@ function App() {
               imageUrl={imageUrl}
               onWin={handleWin}
               onLose={handleLose}
-              onGuess={() => { guessCountRef.current += 1; }}
+              onGuess={() => {
+                guessCountRef.current += 1;
+              }}
             />
           </div>
         )}

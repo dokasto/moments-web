@@ -41,7 +41,14 @@ function evaluateGuess(guess, answer) {
   return result;
 }
 
-export default function Game({ answer, caption, imageUrl, onWin, onLose }) {
+export default function Game({
+  answer,
+  caption,
+  imageUrl,
+  onWin,
+  onLose,
+  onGuess,
+}) {
   const wordLength = answer.length;
   const [guesses, setGuesses] = useState([]);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -77,6 +84,8 @@ export default function Game({ answer, caption, imageUrl, onWin, onLose }) {
       correct_letters: correctLetters,
       is_correct: isCorrect,
     });
+
+    if (onGuess) onGuess();
 
     setGuesses(newGuesses);
     setCurrentGuess("");
