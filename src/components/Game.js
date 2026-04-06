@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import posthog from "posthog-js";
 import ImageViewer from "./ImageViewer";
 
 const MAX_GUESSES = 6;
@@ -67,10 +68,20 @@ export default function Game({ answer, caption, imageUrl, onWin, onLose }) {
 
     const result = evaluateGuess(currentGuess, answer);
     const newGuesses = [...guesses, result];
+    const isCorrect = currentGuess === answer;
+    const correctLetters = result.filter((t) => t.status === "correct").length;
+
+    posthog.capture("guess_submitted", {
+      guess_number: newGuesses.length,
+      word_length: wordLength,
+      correct_letters: correctLetters,
+      is_correct: isCorrect,
+    });
+
     setGuesses(newGuesses);
     setCurrentGuess("");
 
-    if (currentGuess === answer) {
+    if (isCorrect) {
       setTimeout(() => onWin(newGuesses), 1500);
     } else if (newGuesses.length >= MAX_GUESSES) {
       setTimeout(() => onLose(newGuesses), 1500);

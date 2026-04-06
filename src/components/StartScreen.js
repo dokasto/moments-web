@@ -1,4 +1,11 @@
+import posthog from "posthog-js";
+
 export default function StartScreen({ onPlay }) {
+  const handlePlay = () => {
+    posthog.capture("game_started");
+    onPlay();
+  };
+
   return (
     <div className="screen start-screen">
       <h1 className="title">Moments</h1>
@@ -57,7 +64,7 @@ export default function StartScreen({ onPlay }) {
         </div>
       </div>
 
-      <button type="button" className="play-button" onClick={onPlay}>
+      <button type="button" className="play-button" onClick={handlePlay}>
         Play
       </button>
     </div>

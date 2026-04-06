@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import posthog from "posthog-js";
 import modelConfig from "../modelConfig";
 import { loadCaptionModel, generateCaption } from "../captionGenerator";
 import { generateWord } from "../wordGenerator";
@@ -114,9 +115,16 @@ export default function LoadingScreen({ onReady }) {
         console.log("[Phordle] All words:", allWords);
       }
 
+      posthog.capture("game_word_generated", {
+        word_length: word.length,
+        word_source: fromAI ? "ai" : "fallback",
+        total_words: allWords ? allWords.length : 1,
+      });
+
       setStage(STAGES.READY);
       setTimeout(() => onReady(word, text, blobUrl, allWords), 1200);
     } catch (err) {
+      posthog.captureException(err, { event: "image_analysis_failed" });
       setError("Failed to analyze image. Please try another picture.");
       console.error(err);
     }
@@ -137,6 +145,11 @@ export default function LoadingScreen({ onReady }) {
         `[Phordle] Image uploaded: "${file.name}" (${file.type || ext})`,
       );
     }
+
+    posthog.capture("photo_uploaded", {
+      file_type: file.type || "unknown",
+      file_size_kb: Math.round(file.size / 1024),
+    });
 
     const blobUrl = URL.createObjectURL(file);
     setImageUrl(blobUrl);

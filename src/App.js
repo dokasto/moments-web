@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import posthog from "posthog-js";
 import StartScreen from "./components/StartScreen";
 import LoadingScreen from "./components/LoadingScreen";
 import Game from "./components/Game";
@@ -144,6 +145,9 @@ function App() {
 
   const handlePlay = () => {
     if (getPicturesPlayedToday() >= MAX_PICTURES_PER_DAY) {
+      posthog.capture("daily_limit_reached", {
+        limit: MAX_PICTURES_PER_DAY,
+      });
       setScreen("limit");
       return;
     }
@@ -173,20 +177,31 @@ function App() {
   }, []);
 
   const handleWin = useCallback((finalGuesses) => {
+    posthog.capture("game_won", {
+      attempts: finalGuesses.length,
+      word_length: answer.length,
+    });
     setGuesses(finalGuesses);
     setScreen("win");
-  }, []);
+  }, [answer]);
 
   const handleLose = useCallback((finalGuesses) => {
+    posthog.capture("game_lost", {
+      attempts: finalGuesses.length,
+      word_length: answer.length,
+    });
     setGuesses(finalGuesses);
     setScreen("loss");
-  }, []);
+  }, [answer]);
 
   const remainingWords = wordList.filter((w) => !usedWords.includes(w));
   const hasMoreWords = remainingWords.length > 0;
 
   const handlePlayAgain = () => {
     if (!hasMoreWords) return;
+    posthog.capture("play_again_clicked", {
+      words_remaining: remainingWords.length,
+    });
     const next =
       remainingWords[Math.floor(Math.random() * remainingWords.length)];
     const newUsed = [...usedWords, next];
@@ -198,6 +213,7 @@ function App() {
   };
 
   const handleNewPicture = () => {
+    posthog.capture("new_picture_clicked");
     if (imageUrl && imageUrl.startsWith("blob:")) URL.revokeObjectURL(imageUrl);
     setAnswer("");
     setCaption("");
