@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"git show ff14c12:src/modelConfig.js 2>/dev/null; echo \\\"---\\\"; git show 41d8b80:src/modelConfig.js 2>/dev/null\",\"description\":\"Show modelConfig from older commits\"}",
-  "error": "Exit code 128\n---",
-  "timestamp": "2026-04-06T06:03:20.595Z",
-  "retry_count": 2
-}

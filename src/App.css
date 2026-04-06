@@ -141,7 +141,7 @@ body {
   width: min(100%, var(--screen-max-width));
   margin: 0 auto;
   padding: var(--screen-top-padding) var(--screen-inline-padding)
-    var(--screen-bottom-padding);
+    calc(var(--screen-bottom-padding) + 40px);
   max-width: var(--screen-max-width);
   min-height: 100vh;
   min-height: 100dvh;
@@ -572,10 +572,12 @@ body {
   left: 0;
   right: 0;
   text-align: center;
-  padding: 8px;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--color);
+  background: var(--bg);
+  z-index: 50;
 }
 
 .app-footer a {
