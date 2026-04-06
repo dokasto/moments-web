@@ -1,0 +1,5 @@
+Extract keywords from the description below. Output ONLY a comma-separated list of nouns and colors. Nothing else.
+
+Description: ${caption}
+
+Keywords:

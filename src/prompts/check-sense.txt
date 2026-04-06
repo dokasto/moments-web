@@ -1,0 +1,1 @@
+The image shows: "${caption}". Does the word "${word}" relate to this image? Answer yes or no:

@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.gitignore
+.omc
+.omx
+.codex
+.claude
+build
+coverage
+*.md
+.DS_Store
+.env*.local

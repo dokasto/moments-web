@@ -1,0 +1,362 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775455357659,
+  "projectRoot": "/Users/udo/Dev/phordle.com",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "react",
+        "version": "19.2.4",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.2.4",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": null,
+    "devCommand": "npm run start",
+    "scripts": {
+      "sync-prompts": "node scripts/sync-prompts.js",
+      "prestart": "node scripts/sync-prompts.js",
+      "start": "react-scripts start",
+      "prebuild": "node scripts/sync-prompts.js",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "public",
+      "scripts",
+      "src"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "build": {
+      "path": "build",
+      "purpose": "Build output",
+      "fileCount": 7,
+      "lastAccessed": 1775455357646,
+      "keyFiles": [
+        "asset-manifest.json",
+        "favicon.ico",
+        "index.html",
+        "logo192.png",
+        "logo512.png"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 6,
+      "lastAccessed": 1775455357646,
+      "keyFiles": [
+        "favicon.ico",
+        "index.html",
+        "logo192.png",
+        "logo512.png",
+        "manifest.json"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 1,
+      "lastAccessed": 1775455357647,
+      "keyFiles": [
+        "sync-prompts.js"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 8,
+      "lastAccessed": 1775455357647,
+      "keyFiles": [
+        "App.css",
+        "App.js",
+        "App.test.js",
+        "captionGenerator.js",
+        "index.css"
+      ]
+    },
+    "build/static": {
+      "path": "build/static",
+      "purpose": "Static files",
+      "fileCount": 0,
+      "lastAccessed": 1775455357647,
+      "keyFiles": []
+    },
+    "src/components": {
+      "path": "src/components",
+      "purpose": "UI components",
+      "fileCount": 6,
+      "lastAccessed": 1775455357648,
+      "keyFiles": [
+        "Game.js",
+        "ImageViewer.js",
+        "LoadingScreen.js"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src/components/LoadingScreen.js",
+      "accessCount": 63,
+      "lastAccessed": 1775462103879,
+      "type": "file"
+    },
+    {
+      "path": "src/App.css",
+      "accessCount": 60,
+      "lastAccessed": 1775462010901,
+      "type": "file"
+    },
+    {
+      "path": "src/wordGenerator.js",
+      "accessCount": 42,
+      "lastAccessed": 1775459494757,
+      "type": "file"
+    },
+    {
+      "path": "src/App.js",
+      "accessCount": 30,
+      "lastAccessed": 1775461981012,
+      "type": "file"
+    },
+    {
+      "path": "src/modelConfig.js",
+      "accessCount": 28,
+      "lastAccessed": 1775457210684,
+      "type": "file"
+    },
+    {
+      "path": "src/captionGenerator.js",
+      "accessCount": 24,
+      "lastAccessed": 1775458573507,
+      "type": "file"
+    },
+    {
+      "path": "src/components/Game.js",
+      "accessCount": 22,
+      "lastAccessed": 1775457965538,
+      "type": "file"
+    },
+    {
+      "path": "src/App.test.js",
+      "accessCount": 19,
+      "lastAccessed": 1775461824301,
+      "type": "file"
+    },
+    {
+      "path": "src/components/WinScreen.js",
+      "accessCount": 18,
+      "lastAccessed": 1775460064989,
+      "type": "file"
+    },
+    {
+      "path": "src/components/StartScreen.js",
+      "accessCount": 12,
+      "lastAccessed": 1775461502549,
+      "type": "file"
+    },
+    {
+      "path": "src/words.js",
+      "accessCount": 10,
+      "lastAccessed": 1775411482041,
+      "type": "file"
+    },
+    {
+      "path": "src",
+      "accessCount": 10,
+      "lastAccessed": 1775455475208,
+      "type": "directory"
+    },
+    {
+      "path": "src/components/LossScreen.js",
+      "accessCount": 10,
+      "lastAccessed": 1775459178928,
+      "type": "file"
+    },
+    {
+      "path": "src/components/ImageViewer.js",
+      "accessCount": 9,
+      "lastAccessed": 1775412429740,
+      "type": "file"
+    },
+    {
+      "path": "src/prompts/get-word.txt",
+      "accessCount": 7,
+      "lastAccessed": 1775455565220,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 7,
+      "lastAccessed": 1775455565777,
+      "type": "directory"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 6,
+      "lastAccessed": 1775455057162,
+      "type": "file"
+    },
+    {
+      "path": "src/ai.js",
+      "accessCount": 5,
+      "lastAccessed": 1775377947094,
+      "type": "file"
+    },
+    {
+      "path": "src/index.js",
+      "accessCount": 5,
+      "lastAccessed": 1775412389141,
+      "type": "file"
+    },
+    {
+      "path": "src/prompts/index.js",
+      "accessCount": 5,
+      "lastAccessed": 1775456546166,
+      "type": "file"
+    },
+    {
+      "path": "public/index.html",
+      "accessCount": 4,
+      "lastAccessed": 1775377153749,
+      "type": "file"
+    },
+    {
+      "path": "public/prompt.txt",
+      "accessCount": 4,
+      "lastAccessed": 1775411482275,
+      "type": "file"
+    },
+    {
+      "path": "src/modelSelector.js",
+      "accessCount": 3,
+      "lastAccessed": 1775410862214,
+      "type": "file"
+    },
+    {
+      "path": "src/prompts/synonym.txt",
+      "accessCount": 3,
+      "lastAccessed": 1775416208027,
+      "type": "file"
+    },
+    {
+      "path": "src/workers/captionWorker.js",
+      "accessCount": 2,
+      "lastAccessed": 1775456719244,
+      "type": "file"
+    },
+    {
+      "path": "src/workers/wordWorker.js",
+      "accessCount": 2,
+      "lastAccessed": 1775456720340,
+      "type": "file"
+    },
+    {
+      "path": "src/constants/funMessages.js",
+      "accessCount": 2,
+      "lastAccessed": 1775459525152,
+      "type": "file"
+    },
+    {
+      "path": "src/index.css",
+      "accessCount": 1,
+      "lastAccessed": 1775370585936,
+      "type": "file"
+    },
+    {
+      "path": "src/reportWebVitals.js",
+      "accessCount": 1,
+      "lastAccessed": 1775410870668,
+      "type": "file"
+    },
+    {
+      "path": "public/prompts/get-word.txt",
+      "accessCount": 1,
+      "lastAccessed": 1775411551708,
+      "type": "file"
+    },
+    {
+      "path": "public/prompts/check-sense.txt",
+      "accessCount": 1,
+      "lastAccessed": 1775411552794,
+      "type": "file"
+    },
+    {
+      "path": "public/prompts/synonym.txt",
+      "accessCount": 1,
+      "lastAccessed": 1775411553894,
+      "type": "file"
+    },
+    {
+      "path": "public/prompts/retries.txt",
+      "accessCount": 1,
+      "lastAccessed": 1775411555985,
+      "type": "file"
+    },
+    {
+      "path": "src/prompts/check-sense.txt",
+      "accessCount": 1,
+      "lastAccessed": 1775412260597,
+      "type": "file"
+    },
+    {
+      "path": "src/prompts/retries.txt",
+      "accessCount": 1,
+      "lastAccessed": 1775412262805,
+      "type": "file"
+    },
+    {
+      "path": "scripts/sync-prompts.js",
+      "accessCount": 1,
+      "lastAccessed": 1775412277015,
+      "type": "file"
+    },
+    {
+      "path": "src/constants/privacyMessages.js",
+      "accessCount": 1,
+      "lastAccessed": 1775459465284,
+      "type": "file"
+    },
+    {
+      "path": "src/constants/stopWords.js",
+      "accessCount": 1,
+      "lastAccessed": 1775459473855,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

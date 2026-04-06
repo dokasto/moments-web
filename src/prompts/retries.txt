@@ -1,0 +1,5 @@
+"${caption}" - one word (3 to 7 letters) that captures the mood:
+Objects in scene: ${caption}\nWord (3-7 letters):
+The photo shows ${caption}. Name one thing in 3 to 7 letters:
+Describe "${caption}" in one word (3-7 letters):
+${caption}\nWord:

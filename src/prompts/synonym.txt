@@ -1,0 +1,3 @@
+Image description: "${caption}"
+Pick a word related to this image and give a synonym (3 to 7 letters).
+Synonym:
