@@ -1,9 +1,20 @@
 /**
- * PHORDLE AGGRESSIVE STOP-WORD LIST
- * Specifically tuned to remove "Caption Noise" like 'SAYS', 'LOT', 'SIDE', and 'FRONT'.
+ * PHORDLE ULTIMATE STOP-WORD LIST
+ * Targets: Articles, Meta-Caption Noise, Spatial/Positional words,
+ * Auxiliaries, Pronouns, and common "junk" nouns.
  */
 const STOP_WORDS = new Set([
-  // --- THE "PHORDLE KILLERS" (Words that keep popping up in your logs) ---
+  // --- 0. THE "MUST-FILTERS" (Articles & Basic Determiners) ---
+  "A",
+  "AN",
+  "THE",
+  "AMONG",
+  "THESE",
+  "THOSE",
+  "THIS",
+  "THAT",
+
+  // --- 1. THE "PHORDLE KILLERS" (Caption-specific noise) ---
   "SAYS",
   "SAID",
   "READS",
@@ -40,8 +51,14 @@ const STOP_WORDS = new Set([
   "PLACED",
   "LOCATED",
   "POSITIONED",
+  "FACING",
+  "POINTING",
+  "HOLDING",
+  "USING",
+  "WEARING",
+  "SHOWN",
 
-  // --- 1. SPATIAL & DIRECTIONAL (Structural junk) ---
+  // --- 2. SPATIAL, DIRECTIONAL & ANGLES ---
   "ABOVE",
   "BELOW",
   "UNDER",
@@ -71,8 +88,14 @@ const STOP_WORDS = new Set([
   "EDGE",
   "DISTANCE",
   "CLOSE",
+  "NEARBY",
+  "ADJACENT",
+  "VERTICAL",
+  "HORIZONTAL",
+  "DIAGONAL",
+  "ANGLE",
 
-  // --- 2. META-CAPTIONING (Words the AI uses to describe the photo) ---
+  // --- 3. META-CAPTIONING (Words describing the photo itself) ---
   "IMAGE",
   "PICTURE",
   "PHOTO",
@@ -82,7 +105,6 @@ const STOP_WORDS = new Set([
   "SCENE",
   "SHOWS",
   "SHOWED",
-  "SHOWN",
   "DEPICTS",
   "DEPICTED",
   "FEATURES",
@@ -99,9 +121,17 @@ const STOP_WORDS = new Set([
   "LABEL",
   "TEXT",
   "WORDS",
+  "WORD",
   "CAPTION",
+  "CLOSEUP",
+  "MACRO",
+  "BLURRY",
+  "FOCUS",
+  "BACKGROUND",
+  "FRAME",
+  "GRAPHIC",
 
-  // --- 3. QUANTIFIERS & MEASUREMENTS ---
+  // --- 4. QUANTIFIERS, MEASUREMENTS & DEGREE ---
   "MANY",
   "MUCH",
   "SOME",
@@ -127,8 +157,16 @@ const STOP_WORDS = new Set([
   "TOTAL",
   "AMOUNT",
   "NUMBER",
+  "BIT",
+  "QUITE",
+  "RATHER",
+  "SOMEWHAT",
+  "VERY",
+  "EXTREMELY",
+  "HIGH",
+  "LOW",
 
-  // --- 4. NUMBERS (Spelled out) ---
+  // --- 5. NUMBERS & ORDER (Spelled out) ---
   "ZERO",
   "ONE",
   "TWO",
@@ -143,11 +181,16 @@ const STOP_WORDS = new Set([
   "FIRST",
   "SECOND",
   "THIRD",
+  "FOURTH",
+  "FIFTH",
+  "LAST",
   "SINGLE",
   "DOUBLE",
   "TRIPLE",
+  "ONCE",
+  "TWICE",
 
-  // --- 5. PRONOUNS (Subject, Object, Possessive) ---
+  // --- 6. PRONOUNS (Full expansion) ---
   "I",
   "ME",
   "MY",
@@ -195,8 +238,13 @@ const STOP_WORDS = new Set([
   "SOMEONE",
   "SOMEBODY",
   "SOMETHING",
+  "NOBODY",
+  "NONE",
+  "NOTHING",
+  "WHATEVER",
+  "WHICHEVER",
 
-  // --- 6. CORE VERBS & AUXILIARIES (State of being) ---
+  // --- 7. CORE VERBS & AUXILIARIES (State of being/Action-less) ---
   "AM",
   "ARE",
   "IS",
@@ -233,8 +281,15 @@ const STOP_WORDS = new Set([
   "MAY",
   "MIGHT",
   "MUST",
+  "SEEM",
+  "SEEMED",
+  "SEEMS",
+  "BECOME",
+  "BECAME",
+  "STAY",
+  "KEEP",
 
-  // --- 7. ADVERBS & FILLERS (The "Junk" words) ---
+  // --- 8. ADVERBS, FILLERS & TEMPORAL ---
   "VERY",
   "JUST",
   "ONLY",
@@ -266,8 +321,18 @@ const STOP_WORDS = new Set([
   "WELL",
   "TODAY",
   "YESTERDAY",
+  "TOMORROW",
+  "SOON",
+  "LATER",
+  "EARLY",
+  "HERE",
+  "THERE",
+  "WHERE",
+  "WHEN",
+  "WHY",
+  "HOW",
 
-  // --- 8. PREPOSITIONS & CONJUNCTIONS ---
+  // --- 9. PREPOSITIONS & CONJUNCTIONS ---
   "AND",
   "BUT",
   "OR",
@@ -293,8 +358,10 @@ const STOP_WORDS = new Set([
   "YET",
   "IF",
   "AS",
+  "UNTIL",
+  "DURING",
 
-  // --- 9. MISC NOISE ---
+  // --- 10. MISC / ARCHAIC / TECHNICAL ---
   "ETC",
   "E.G.",
   "I.E.",
@@ -302,6 +369,16 @@ const STOP_WORDS = new Set([
   "VIA",
   "NA",
   "N/A",
+  "WWW",
+  "COM",
+  "HTTP",
+  "HENCE",
+  "THENCE",
+  "THEREBY",
+  "WHEREBY",
+  "UPON",
+  "INTO",
+  "ONTO",
 ]);
 
 export default STOP_WORDS;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import posthog from "posthog-js";
 import StartScreen from "./components/StartScreen";
@@ -110,6 +110,42 @@ function App() {
   const [usedWords, setUsedWords] = useState([]);
   const [restored, setRestored] = useState(false);
 
+  // Timing refs for play duration tracking
+  const gameStartTime = useRef(null);
+  const sessionStartTime = useRef(Date.now());
+  const guessCountRef = useRef(0);
+
+  // Track daily session on mount
+  useEffect(() => {
+    posthog.capture("daily_session", {
+      pictures_played_today: getPicturesPlayedToday(),
+      daily_limit: MAX_PICTURES_PER_DAY,
+    });
+
+    // Track session duration + abandoned games on page unload
+    const handleBeforeUnload = () => {
+      const sessionDurationSec = Math.round((Date.now() - sessionStartTime.current) / 1000);
+      posthog.capture("session_ended", {
+        session_duration_seconds: sessionDurationSec,
+        pictures_played_today: getPicturesPlayedToday(),
+      });
+
+      // If user is mid-game, track abandonment
+      if (gameStartTime.current && (screen === "game" || screen === "loading")) {
+        const gameDurationSec = Math.round((Date.now() - gameStartTime.current) / 1000);
+        posthog.capture("game_abandoned", {
+          stage: screen,
+          game_duration_seconds: gameDurationSec,
+          guesses_made: guessCountRef.current,
+          word_length: answer.length || 0,
+        });
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Restore saved session on mount
   useState(() => {
     const saved = loadSession();
@@ -155,6 +191,8 @@ function App() {
   };
 
   const handleReady = useCallback((word, captionText, blobUrl, allWords) => {
+    gameStartTime.current = Date.now();
+    guessCountRef.current = 0;
     setAnswer(word);
     setCaption(captionText);
     setImageUrl(blobUrl);
@@ -177,19 +215,29 @@ function App() {
   }, []);
 
   const handleWin = useCallback((finalGuesses) => {
+    const gameDurationSec = gameStartTime.current
+      ? Math.round((Date.now() - gameStartTime.current) / 1000)
+      : null;
     posthog.capture("game_won", {
       attempts: finalGuesses.length,
       word_length: answer.length,
+      game_duration_seconds: gameDurationSec,
     });
+    gameStartTime.current = null;
     setGuesses(finalGuesses);
     setScreen("win");
   }, [answer]);
 
   const handleLose = useCallback((finalGuesses) => {
+    const gameDurationSec = gameStartTime.current
+      ? Math.round((Date.now() - gameStartTime.current) / 1000)
+      : null;
     posthog.capture("game_lost", {
       attempts: finalGuesses.length,
       word_length: answer.length,
+      game_duration_seconds: gameDurationSec,
     });
+    gameStartTime.current = null;
     setGuesses(finalGuesses);
     setScreen("loss");
   }, [answer]);
@@ -209,10 +257,23 @@ function App() {
     setAnswer(next);
     setGuesses([]);
     setScreen("game");
+    gameStartTime.current = Date.now();
+    guessCountRef.current = 0;
     persistSession({ usedWords: newUsed, answer: next });
   };
 
   const handleNewPicture = () => {
+    // Track abandoned game if user leaves mid-game for a new picture
+    if (gameStartTime.current) {
+      const gameDurationSec = Math.round((Date.now() - gameStartTime.current) / 1000);
+      posthog.capture("game_abandoned", {
+        stage: screen,
+        game_duration_seconds: gameDurationSec,
+        guesses_made: guessCountRef.current,
+        word_length: answer.length || 0,
+      });
+      gameStartTime.current = null;
+    }
     posthog.capture("new_picture_clicked");
     if (imageUrl && imageUrl.startsWith("blob:")) URL.revokeObjectURL(imageUrl);
     setAnswer("");
@@ -264,6 +325,7 @@ function App() {
               imageUrl={imageUrl}
               onWin={handleWin}
               onLose={handleLose}
+              onGuess={() => { guessCountRef.current += 1; }}
             />
           </div>
         )}
