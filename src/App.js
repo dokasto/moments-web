@@ -17,6 +17,16 @@ const pageTransition = {
   exit: { opacity: 0, y: -20 },
   transition: { duration: 0.3 },
 };
+const FEEDBACK_MAILTO_CHARS = [
+  109, 97, 105, 108, 116, 111, 58, 100, 111, 107, 97, 115, 116, 111, 46, 108,
+  97, 98, 115, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109,
+];
+const FEEDBACK_EMAIL_REVERSED = FEEDBACK_MAILTO_CHARS.slice(7)
+  .map((char) => String.fromCharCode(char))
+  .join("")
+  .split("")
+  .reverse()
+  .join("");
 
 const MAX_PICTURES_PER_DAY = 2;
 const SESSION_KEY = "phordle_session";
@@ -114,6 +124,11 @@ function App() {
   const gameStartTime = useRef(null);
   const sessionStartTime = useRef(Date.now());
   const guessCountRef = useRef(0);
+  const handleFeedbackClick = useCallback(() => {
+    window.location.href = FEEDBACK_MAILTO_CHARS.map((char) =>
+      String.fromCharCode(char),
+    ).join("");
+  }, []);
 
   // Track daily session on mount
   useEffect(() => {
@@ -388,6 +403,19 @@ function App() {
         <a href="https://dokasto.com" target="_blank" rel="noopener noreferrer">
           Udo
         </a>
+        <span className="app-footer-separator" aria-hidden="true">
+          {" "}
+          ·{" "}
+        </span>
+        <button
+          type="button"
+          className="app-footer-link"
+          onClick={handleFeedbackClick}
+          aria-label="Send feedback to dokasto.labs@gmail.com by email"
+        >
+          Send feedback to{" "}
+          <span className="app-footer-email">{FEEDBACK_EMAIL_REVERSED}</span>
+        </button>
       </footer>
     </div>
   );

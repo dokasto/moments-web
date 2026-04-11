@@ -580,14 +580,30 @@ body {
   z-index: 50;
 }
 
-.app-footer a {
+.app-footer a,
+.app-footer-link {
   color: var(--color);
   text-decoration: none;
   font-weight: 800;
   text-decoration: underline;
 }
 
-.app-footer a:hover {
+.app-footer-link {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.app-footer-email {
+  display: inline-block;
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.app-footer a:hover,
+.app-footer-link:hover {
   text-decoration: underline;
 }
 
