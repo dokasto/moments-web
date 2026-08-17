@@ -2,6 +2,9 @@
 
 A photo-based Wordle. Upload a picture, and AI running **entirely in your browser** picks a hidden word (3–7 letters) from the image. Guess the word in 6 tries. Your photo never leaves your device.
 
+## Preview
+https://momentsgame.com/
+
 ## How It Works
 
 1. Upload any photo.
