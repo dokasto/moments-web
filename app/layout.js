@@ -1,7 +1,8 @@
-import { Metadata } from "next";
 import Script from "next/script";
 import "../src/index.css";
 import "../src/App.css";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export const metadata = {
   title:
@@ -30,8 +31,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="theme-color" content="#000000" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href={`${basePath}/manifest.json`} />
+        <link
+          rel="apple-touch-icon"
+          href={`${basePath}/apple-touch-icon.png`}
+        />
       </head>
       <body>
         {children}

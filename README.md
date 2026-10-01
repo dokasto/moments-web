@@ -3,7 +3,7 @@
 A photo-based Wordle. Upload a picture, and AI running **entirely in your browser** picks a hidden word (3–7 letters) from the image. Guess the word in 6 tries. Your photo never leaves your device.
 
 ## Preview
-https://momentsgame.com/
+https://dokasto.github.io/moments-web/
 
 ## How It Works
 
@@ -12,6 +12,11 @@ https://momentsgame.com/
 3. Guess the word Wordle-style — green = correct spot, yellow = wrong spot, grey = not in the word.
 
 Built with Next.js, React 19, and Framer Motion.
+
+## Deployment
+
+Pushes to `main` are exported as a static site and deployed to GitHub Pages by
+the `Deploy to GitHub Pages` workflow.
 
 ## Development
 
